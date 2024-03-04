@@ -1,0 +1,28 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="LightTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimaryLight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryVariantLight</item>
+        <item name="colorSecondary">@color/colorSecondaryLight</item>
+        <item name="colorAccent">@color/colorSecondaryLight</item>
+        <item name="android:textColor">@color/frontColorLight</item>
+        <item name="android:textColorHint">@color/hintColorLight</item>
+        <item name="frontColor">@color/frontColorLight</item>
+        <item name="loopArrow">@drawable/loop_arrow_light</item>
+
+        <item name="AlertBackground">@color/colorPrimaryLight</item>
+        <item name="android:windowBackground">@color/colorPrimaryLight</item>
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/colorPrimaryLight</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    </style>
+
+    <style name="AlertDialog" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="colorSurface">?attr/AlertBackground</item>
+        <item name="android:background">?attr/AlertBackground</item>
+        <item name="android:textColor">?attr/frontColor</item>
+        <item name="android:textColorAlertDialogListItem">?attr/frontColor</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar"/>
+
+</resources>
