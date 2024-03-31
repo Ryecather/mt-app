@@ -20,6 +20,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // 点击键盘输入， 跳转到键盘输入界面
+        findViewById(R.id.button_keyboard_input).setOnClickListener(v -> {
+            Intent intent = new Intent(activity, keyboard.class);
+            startActivity(intent);
+        });
+
     }
 
     @Override

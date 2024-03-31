@@ -18,4 +18,10 @@
     <string name="language">语言</string>
     <string name="latest_languages">最近</string>
     <string name="all_language">全部</string>
+    <string name="chooseSLanguage">源语言</string>
+    <string name="switchLanguages">语言方向翻转</string>
+    <string name="chooseTLanguage">目标语言</string>
+    <string name="removeText">移除</string>
+    <string name="playVoice">播放</string>
+    <string name="share">分享</string>
 </resources>

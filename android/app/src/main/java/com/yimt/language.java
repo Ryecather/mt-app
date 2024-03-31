@@ -2,9 +2,11 @@ package com.yimt;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,31 +37,34 @@ public class language extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("语言");
         }
-
-        // Get the TextViews
+        // 获取 TextViews
         TextView language1 = findViewById(R.id.language1);
         TextView language2 = findViewById(R.id.language2);
         TextView language3 = findViewById(R.id.language3);
 
-        // Set the click listeners
-        language1.setOnClickListener(this::toggleCheckmark);
-        language2.setOnClickListener(this::toggleCheckmark);
-        language3.setOnClickListener(this::toggleCheckmark);
+        // 创建一个通用的点击监听器
+        View.OnClickListener languageClickListener = this::toggleCheckmark;
 
-        // 获取RecyclerView
+        // 为 TextViews 设置点击监听器
+        language1.setOnClickListener(languageClickListener);
+        language2.setOnClickListener(languageClickListener);
+        language3.setOnClickListener(languageClickListener);
+
+        // 获取 RecyclerView
         RecyclerView recyclerView = findViewById(R.id.all_languages_recycler_view);
 
-        // 创建一个新的LinearLayoutManager
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-
-        // 将LinearLayoutManager设置为RecyclerView的布局管理器
-        recyclerView.setLayoutManager(layoutManager);
-
-        // 创建一个新的LanguageAdapter
+        // 创建一个新的 LanguageAdapter
         LanguageAdapter adapter = new LanguageAdapter(this);
 
-        // 将LanguageAdapter设置为RecyclerView的适配器
+        // 为 RecyclerView 设置适配器
         recyclerView.setAdapter(adapter);
+
+        // 设置 RecyclerView 的布局管理器
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // 为 RecyclerView 的每个语言选项设置点击监听器
+
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(itemDecoration);
     }
 
 //    public void selectLanguage(View view) {
@@ -94,41 +99,86 @@ public class language extends AppCompatActivity {
         selectedPosition = position;
     }
 
+//    public void toggleCheckmark(View view) {
+//        // 获取最近使用的语言
+//        TextView language1 = findViewById(R.id.language1);
+//        TextView language2 = findViewById(R.id.language2);
+//        TextView language3 = findViewById(R.id.language3);
+//
+//        List<TextView> languages = Arrays.asList(language1, language2, language3);
+//        for (TextView language : languages) {
+//            // 如果视图的 ID 是最近使用的语言的 ID，那么就设置它的 drawable 为打勾的图标
+//            if (language.getId() == view.getId()) {
+//                language.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_checkmark, 0, 0, 0);
+//            } else { // 否则设置为透明的图标
+//                language.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_transparent, 0, 0, 0);
+//            }
+//        }
+//
+//        // 从视图的标签中获取位置
+//        Integer position = (Integer) view.getTag();
+//
+//        // 检查位置是否为 null
+//        if (position == null) {
+//            // 如果位置为 null，那么就返回，不做任何事情
+//            return;
+//        }
+//
+//        // 获取 RecyclerView
+//        RecyclerView recyclerView = findViewById(R.id.all_languages_recycler_view);
+//
+//        // 获取 RecyclerView 的适配器
+//        LanguageAdapter adapter = (LanguageAdapter) recyclerView.getAdapter();
+//
+//        // 设置被选中的语言的位置
+//        if (adapter != null) {
+//            adapter.setSelectedPosition(position);
+//        }
+//
+//        // 获取选中的语言
+//        String selectedLanguage = ((TextView) view).getText().toString();
+//
+//        // 创建一个新的Intent
+//        Intent resultIntent = new Intent();
+//
+//        // 将视图ID和选中的语言添加到Intent中
+//        resultIntent.putExtra("viewId", getIntent().getIntExtra("viewId", 0));
+//        resultIntent.putExtra("language", selectedLanguage);
+//
+//        // 设置结果并结束Activity
+//        setResult(RESULT_OK, resultIntent);
+//        finish();
+//    }
     public void toggleCheckmark(View view) {
-        // 获取最近使用的语言
-        TextView language1 = findViewById(R.id.language1);
-        TextView language2 = findViewById(R.id.language2);
-        TextView language3 = findViewById(R.id.language3);
+        // 获取选中的语言
+        String selectedLanguage = ((TextView) view).getText().toString();
 
-        List<TextView> languages = Arrays.asList(language1, language2, language3);
-        for (TextView language : languages) {
-            // 如果视图的 ID 是最近使用的语言的 ID，那么就设置它的 drawable 为打勾的图标
-            if (language.getId() == view.getId()) {
-                language.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_checkmark, 0, 0, 0);
-            } else { // 否则设置为透明的图标
-                language.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_transparent, 0, 0, 0);
-            }
-        }
+        // 创建一个新的Intent
+        Intent resultIntent = new Intent();
 
-        // 从视图的标签中获取位置
-        Integer position = (Integer) view.getTag();
+        // 将视图ID和选中的语言添加到Intent中
+        resultIntent.putExtra("viewId", getIntent().getIntExtra("viewId", 0));
+        resultIntent.putExtra("language", selectedLanguage);
 
-        // 检查位置是否为 null
-        if (position == null) {
-            // 如果位置为 null，那么就返回，不做任何事情
-            return;
-        }
+        // 设置结果并结束Activity
+        setResult(RESULT_OK, resultIntent);
+        finish();
+    }
 
-        // 获取 RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.all_languages_recycler_view);
+    public void onLanguageItemClick(View view) {
+        // 获取选中的语言
+        String selectedLanguage = ((TextView) view).getText().toString();
 
-        // 获取 RecyclerView 的适配器
-        LanguageAdapter adapter = (LanguageAdapter) recyclerView.getAdapter();
+        // 创建一个新的Intent
+        Intent resultIntent = new Intent();
 
-        // 设置被选中的语言的位置
-        if (adapter != null) {
-            adapter.setSelectedPosition(position);
-        }
+        // 将视图ID和选中的语言添加到Intent中
+        resultIntent.putExtra("viewId", getIntent().getIntExtra("viewId", 0));
+        resultIntent.putExtra("language", selectedLanguage);
+
+        // 设置结果并结束Activity
+        setResult(RESULT_OK, resultIntent);
+        finish();
     }
 
     @Override

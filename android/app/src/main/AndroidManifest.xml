@@ -22,6 +22,9 @@
         android:theme="@style/LightTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".keyboard"
+            android:exported="false" />
+        <activity
             android:name=".language"
             android:exported="false" />
         <activity

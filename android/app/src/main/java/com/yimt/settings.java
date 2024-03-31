@@ -13,12 +13,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.yimt.databinding.ActivitySettingsBinding;
-
 public class settings extends AppCompatActivity {
     private final static String DEFAULT_SERVER = "http://192.168.1.104:5555";
     private SharedPreferences settings;
-    private ActivitySettingsBinding binding;
     private EditText editTextServer;
 
     @Override

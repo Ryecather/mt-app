@@ -36,11 +36,10 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Langua
         textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_transparent, 0, 0, 0);
 
         // 为 TextView 设置一个点击事件
-        textView.setOnClickListener(activity::toggleCheckmark);
+        textView.setOnClickListener(activity::onLanguageItemClick);
 
         return new LanguageViewHolder(textView);
     }
-
     @Override
     public void onBindViewHolder(@NonNull LanguageViewHolder holder, int position) {
         // 为每一项设置正确的数据
